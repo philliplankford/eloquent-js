@@ -21,27 +21,6 @@ function sum(array) {
 
 exports.sum = sum;
 
-/* // 4.1 Solution
-function range(start, end, step = start < end ? 1 : -1) {
-  let array = [];
-
-  if (step > 0) {
-    for (let i = start; i <= end; i += step) array.push(i);
-  } else {
-    for (let i = start; i >= end; i += step) array.push(i);
-  }
-  return array;
-}
-
-function sum(array) {
-  let total = 0;
-  for (let value of array) {
-    total += value;
-  }
-  return total;
-}
-*/
-
 // Excercise 4.2 - Reversing an Array
 
 // produces new array
@@ -68,23 +47,60 @@ function reverseArrayInPlace(array) {
 
 exports.reverseArrayInPlace = reverseArrayInPlace;
 
-/* // 4.2 Solution
-function reverseArray(array) {
-  let output = [];
-  for (let i = array.length - 1; i >= 0; i--) {
-    output.push(array[i]);
-  }
-  return output;
-}
-
-function reverseArrayInPlace(array) {
-  for (let i = 0; i < Math.floor(array.length / 2); i++) {
-    let old = array[i];
-    array[i] = array[array.length - 1 - i];
-    array[array.length - 1 - i] = old;
-  }
-  return array;
-}
-*/
-
 // Exercise 4.3 - A List
+function arrayToList(array) {
+    if (array.length > 0) {
+        return {
+            value: array.shift(),
+            rest: arrayToList(array)
+        }
+    } else { return null; }
+}
+
+exports.arrayToList = arrayToList;
+
+function listToArray(list) {
+    let array = [];
+    for (let obj = list; obj; obj = obj.rest) {
+      array.push(obj.value);
+    }
+    return array;
+}
+
+exports.listToArray = listToArray;
+
+function prepend(element, list) {
+    return { value: element, rest: list };
+}
+
+exports.prepend = prepend;
+
+function nth(list, num) {
+    if (num === 0) return list;
+    if (!list) return undefined;
+    return nth(list.rest, num - 1);
+}
+
+exports.nth = nth;
+
+// Exercise 4.4 - Deep Comparison
+function deepEqual(val1, val2){
+
+    if (val1 === val2) return true;
+    if (val1 === null || val2 === null) return false;
+    if (typeof val1 === "object" && typeof val2 === "object") {
+        const keys1 = Object.keys(val1);
+        const keys2 = Object.keys(val2);
+        if (keys1.length === keys2.length) {
+            for (let i = 0; i < keys1.length; i++) {
+                if (keys1[i] !== keys2[i]) return false;
+                if (!deepEqual(val1[keys1[i]], val2[keys2[i]])) return false;
+            }
+            return true;
+        } else { return false; }
+    }
+    return false;
+
+}
+
+exports.deepEqual = deepEqual;
