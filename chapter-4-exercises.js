@@ -9,7 +9,7 @@ function range(start, end, step = start < end ? 1 : -1) {
     return rangeArr;
 }
 
-exports.range = range;
+module.exports.range = range;
 
 function sum(array) {
     let culm = 0;
@@ -19,7 +19,7 @@ function sum(array) {
     return culm;
 }
 
-exports.sum = sum;
+module.exports.sum = sum;
 
 // Excercise 4.2 - Reversing an Array
 
@@ -32,7 +32,7 @@ function reverseArray(array) {
     return reverse;
 }
 
-exports.reverseArray = reverseArray;
+module.exports.reverseArray = reverseArray;
 
 // modifies given array
 function reverseArrayInPlace(array) {
@@ -45,7 +45,7 @@ function reverseArrayInPlace(array) {
     return array;
 }
 
-exports.reverseArrayInPlace = reverseArrayInPlace;
+module.exports.reverseArrayInPlace = reverseArrayInPlace;
 
 // Exercise 4.3 - A List
 function arrayToList(array) {
@@ -57,7 +57,7 @@ function arrayToList(array) {
     } else { return null; }
 }
 
-exports.arrayToList = arrayToList;
+module.exports.arrayToList = arrayToList;
 
 function listToArray(list) {
     let array = [];
@@ -67,13 +67,13 @@ function listToArray(list) {
     return array;
 }
 
-exports.listToArray = listToArray;
+module.exports.listToArray = listToArray;
 
 function prepend(element, list) {
     return { value: element, rest: list };
 }
 
-exports.prepend = prepend;
+module.exports.prepend = prepend;
 
 function nth(list, num) {
     if (num === 0) return list;
@@ -81,7 +81,7 @@ function nth(list, num) {
     return nth(list.rest, num - 1);
 }
 
-exports.nth = nth;
+module.exports.nth = nth;
 
 // Exercise 4.4 - Deep Comparison
 function deepEqual(val1, val2){
@@ -103,4 +103,4 @@ function deepEqual(val1, val2){
 
 }
 
-exports.deepEqual = deepEqual;
+module.exports.deepEqual = deepEqual;

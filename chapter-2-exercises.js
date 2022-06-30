@@ -9,7 +9,7 @@ function buildTriangle(){
     return line;
 }
 
-exports.buildTriangle = buildTriangle;
+module.exports.buildTriangle = buildTriangle;
 
 /* // 2.1 Solution
 function solutionTriangle() {
@@ -38,7 +38,7 @@ function fizzBuzz(num) {
     }
 }
 
-exports.fizzBuzz = fizzBuzz;
+module.exports.fizzBuzz = fizzBuzz;
 
 /* // 2.2 Solution
 function solutionFizzBuzz() {
@@ -72,7 +72,7 @@ function chessBoard(size) {
     return board;
 }
 
-exports.chessBoard = chessBoard;
+module.exports.chessBoard = chessBoard;
 
 /* //2.3 Solution
 function solutionChessBoard() {

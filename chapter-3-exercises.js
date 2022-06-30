@@ -4,7 +4,7 @@ function min(num1, num2){
     return Math.min(num1, num2);
 };
 
-exports.min = min;
+module.exports.min = min;
 
 /* // 3.1 Solution 
 function min(a, b) {
@@ -22,7 +22,7 @@ function isEven(num){
     else { return isEven(num - 2); }
 };
 
-exports.isEven = isEven;
+module.exports.isEven = isEven;
 
 /* // 3.2 Recursion Solution 
 function isEven(n){
@@ -48,8 +48,8 @@ function countBs(string){
     return countChar(string, "B");
 };
 
-exports.countChar = countChar;
-exports.countBs = countBs;
+module.exports.countChar = countChar;
+module.exports.countBs = countBs;
 
 /* // 3.3 Solution
 function countChar(string, ch) {
