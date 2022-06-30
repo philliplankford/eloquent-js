@@ -5,7 +5,7 @@ function flatten(array) {
     return array.reduce( (prev, current) => [...prev, ...current] );
 }
 
-exports.flatten = flatten;
+module.exports.flatten = flatten;
 
 // Exercise 5.2 - Your Own Loop
 // write higher-order function
@@ -24,7 +24,7 @@ function loop(val, testFunc, updateFunc, bodyFunc) {
     //   }
 }
 
-exports.loop = loop;
+module.exports.loop = loop;
 
 // Exercise 5.3 - Everything
 // Array's have an every method 
@@ -40,7 +40,7 @@ function everyLoop(array, condition) {
     return true;
 };
 
-exports.everyLoop = everyLoop;
+module.exports.everyLoop = everyLoop;
 
 // using some
 function everySome(array, condition) {
@@ -49,4 +49,51 @@ function everySome(array, condition) {
     return !array.some(element => !condition(element));
 };
 
-exports.everySome = everySome;    
+module.exports.everySome = everySome;
+
+// Exercise 5.4 - Dominant Writing Direction
+
+const { SCRIPTS } = require("./chapter-5-scripts");
+
+function dominantDirection(string){
+    // we have to loop through each character of the string 
+    // check its code against SCRIPT 
+    // return its writing direction
+    // calculate which writing direction is dominant
+    const counted = countGroups(string, char => {
+        let dir = characterDirection(char);
+        return dir ? dir : "none";
+    }).filter(({name}) => name != "none");
+
+    if (!counted.length) return "ltr";
+
+    return counted.reduce((a, b) => a.count > b.count ? a : b).name;
+}
+
+module.exports.dominantDirection = dominantDirection;
+
+function characterDirection(char){
+    let code = char.codePointAt(0);
+    for (let script of SCRIPTS) {
+        if (script.ranges.some(([from, to]) => {
+            return code >= from && code < to;
+        })) { return script.direction }
+    }
+    return null;
+}
+
+module.exports.characterDirection = characterDirection;
+
+function countGroups(items, groupName) {
+    const count = [];
+    for (let item of items) {
+        const name = groupName(item);
+        const known = count.findIndex(c => c.name == name);
+        if (known == -1) {
+            count.push({name, count: 1});
+        } else { count[known].count++; }
+    }
+    return count;
+}
+
+module.exports.countGroups = countGroups;
