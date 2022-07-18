@@ -1,6 +1,7 @@
 const { Vector,
         Group, 
-        GroupIterable} = require('./chapter-6-exercises');
+        GroupIterable,
+        checkProperty } = require('./chapter-6-exercises');
 
 // 6.1 Tests
 describe("Vector Method Tests", () => {
@@ -97,5 +98,20 @@ describe("Group Iterable Method Tests", () => {
         expect(consoleLog).toHaveBeenCalledWith("a");
         expect(consoleLog).toHaveBeenCalledWith("b");
         expect(consoleLog).toHaveBeenCalledWith("c");
+    });
+});
+
+// 6.4 Tests
+describe("Use hasOwnProperty even if its defined in an object", () => {
+    const map = { one: true, hasOwnProperty: true};
+
+    test("hasOwnProperty returns true", () => {
+        expect(checkProperty(map, "hasOwnProperty")).toBe(true);
+    });
+    test("checking property 'one' returns true", () => {
+        expect(checkProperty(map, "one")).toBe(true);
+    });
+    test("checking unknown property return false", () => {
+        expect(checkProperty(map, "yolo")).toBe(false);
     });
 });

@@ -88,3 +88,13 @@ class GroupIterable {
 };
 
 module.exports.GroupIterable = GroupIterable;
+
+// Exercise 6.4 - Borrowing A Method
+// How can you call hasOwnProperty on an obect
+// that has its own property called "hasOwnProperty"
+
+function checkProperty(map, propertyString) {
+    return Object.prototype.hasOwnProperty.call(map, propertyString);
+}
+
+module.exports.checkProperty = checkProperty;
