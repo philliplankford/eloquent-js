@@ -1,9 +1,17 @@
-const { flatten, loop, everyLoop, everySome, characterDirection, countGroups, dominantDirection } = require("./chapter-5-exercises");
+const { flatten, 
+        loop, 
+        everyLoop, 
+        everySome, 
+        characterDirection, 
+        countGroups, 
+        dominantDirection } = require("./chapter-5-exercises");
 
+// 5.1 Tests
 test("convert array of arrays to single array", () => {
     expect(flatten([[1,2,3],[4,5,6],[7,8,9]])).toStrictEqual([1,2,3,4,5,6,7,8,9]);
 });
 
+// 5.2 Tests
 test("apply given function to each value that fulfills a condition", () => {
     const logSpy = jest.spyOn(console, "log");
 
@@ -14,6 +22,7 @@ test("apply given function to each value that fulfills a condition", () => {
     expect(logSpy).toHaveBeenCalledWith(3);
 });
 
+// 5.3 Tests
 test("return true for all array elements against given test w/ loop", () => {
     expect(everyLoop([5,6,7], n => n > 1)).toBe(true);
     expect(everyLoop([5,6,1,0], n => n > 1)).toBe(false);
