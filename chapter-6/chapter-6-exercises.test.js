@@ -1,5 +1,6 @@
 const { Vector,
-        Group } = require('./chapter-6-exercises');
+        Group, 
+        GroupIterable} = require('./chapter-6-exercises');
 
 // 6.1 Tests
 describe("Vector Method Tests", () => {
@@ -49,7 +50,7 @@ describe("Vector SpyOn Tests", () => {
 describe("Group Method Tests", () => {
     const group = Group.from([10, 20]);
     test("group from iterable should create a group", () => {
-        expect(group).toEqual({"group": [10,20]});
+        expect(group).toEqual({"values": [10,20]});
     });
 
     test("add a value from the group if it doesn't already exist", () => {
@@ -62,10 +63,39 @@ describe("Group Method Tests", () => {
         expect(group.has(10)).toBe(true);
         expect(group.has(30)).toBe(false);
     });
-    
+
     test("delete a number from the group", () => {
         group.delete(10);
         expect(group.has(10)).toBe(false);
         expect(group.delete(10)).toBe(undefined);
+    });
+});
+
+// 6.3 Tests
+describe("Group Iterable Method Tests", () => {
+
+    test("returns an object with first value and false done", () => {
+        const iterable = new GroupIterable(Group.from([10,20]));
+        const none = new GroupIterable(Group.from([]));
+
+        expect(iterable.next()).toEqual({value: 10, done: false});
+        expect(none.next()).toEqual({done: true});
+    });
+
+    test("Symbol.iterator method", () => {
+        const group = Group.from([10,20]);
+        expect(group[Symbol.iterator]()).toEqual({inc: 0, group: {values: [10,20]}});
+    });
+
+    // Itegration Tests
+    test("Iterates Over Group Successfully", () => {
+        const consoleLog = jest.spyOn(console, "log");
+        for (let value of Group.from(["a", "b", "c"])){
+            console.log(value);
+        }
+        expect(consoleLog).toHaveBeenCalledTimes(3);
+        expect(consoleLog).toHaveBeenCalledWith("a");
+        expect(consoleLog).toHaveBeenCalledWith("b");
+        expect(consoleLog).toHaveBeenCalledWith("c");
     });
 });
