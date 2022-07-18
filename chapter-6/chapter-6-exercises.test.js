@@ -1,4 +1,5 @@
-const { Vector } = require('./chapter-6-exercises');
+const { Vector,
+        Group } = require('./chapter-6-exercises');
 
 // 6.1 Tests
 describe("Vector Method Tests", () => {
@@ -42,4 +43,29 @@ describe("Vector SpyOn Tests", () => {
         expect(minusSpy).toHaveBeenCalledTimes(1);
         expect(minusSpy).toHaveReturnedWith({x: 0, y: 0});
     })
+});
+
+// 6.2 Tests
+describe("Group Method Tests", () => {
+    const group = Group.from([10, 20]);
+    test("group from iterable should create a group", () => {
+        expect(group).toEqual({"group": [10,20]});
+    });
+
+    test("add a value from the group if it doesn't already exist", () => {
+        group.add(40);
+        expect(group.has(40)).toBe(true);
+        expect(group.add(40)).toBe(undefined);
+    });
+
+    test("detect if a group has a number already", () => {
+        expect(group.has(10)).toBe(true);
+        expect(group.has(30)).toBe(false);
+    });
+    
+    test("delete a number from the group", () => {
+        group.delete(10);
+        expect(group.has(10)).toBe(false);
+        expect(group.delete(10)).toBe(undefined);
+    });
 });

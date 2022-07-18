@@ -30,3 +30,34 @@ class Vector {
 }
 
 module.exports.Vector = Vector;
+
+// Exercise 6.2 - Groups
+// Make a group class that has add, delete, and has methods
+// this class will emulate a set
+// make a static from method that takes an iterable and makesa group
+
+class Group {
+    constructor() {
+        this.group = [];
+    };
+
+    add(value) {
+        if (!this.group.includes(value)) {this.group.push(value);};
+    };
+
+    delete(value) {
+        if (this.group.includes(value)) {
+            this.group = this.group.filter( each => each != value);
+        };
+    };
+
+    has(value) { return this.group.includes(value); };
+
+    static from(iterable) { 
+        const group = new Group();
+        iterable.forEach(val => group.add(val));
+        return group;
+    };
+};
+
+module.exports.Group = Group;
