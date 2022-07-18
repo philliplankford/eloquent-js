@@ -21,8 +21,8 @@ describe("Vector Method Tests", () => {
 describe("Vector Interface", () => {
     const vector = new Vector(1,1);
     test("object defined", () => { expect(vector).toEqual({x: 1, y: 1})});
-    test("defines plus()", () => { expect(typeof vector.plus).toBe("function"); });
-    test("defines minus()", () => { expect(typeof vector.minus).toBe("function"); });
+    test("defines plus() as function", () => { expect(typeof vector.plus).toBe("function"); });
+    test("defines minus() as function", () => { expect(typeof vector.minus).toBe("function"); });
 });
 
 describe("Vector SpyOn Tests", () => {
@@ -39,6 +39,7 @@ describe("Vector SpyOn Tests", () => {
     });
 
     test("Minus should be called once and return Vector {x: 0, y: 0}", () => {
+        // using variable assignment
         const minusSpy = jest.spyOn(Vector.prototype, 'minus');
         vector.minus(new Vector(1,1));
 
@@ -75,7 +76,7 @@ describe("Group Method Tests", () => {
 // 6.3 Tests
 describe("Group Iterable Method Tests", () => {
 
-    test("returns an object with first value and false done", () => {
+    test("check that the next method iterates correctly", () => {
         const iterable = new GroupIterable(Group.from([10,20]));
         const none = new GroupIterable(Group.from([]));
 
