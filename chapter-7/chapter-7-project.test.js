@@ -1,4 +1,9 @@
-const { buildGraph, VillageState } = require('./chapter-7-project');
+const { buildGraph, 
+        VillageState, 
+        randomPick, 
+        randomRobot,
+        runRobot,
+        routeRobot } = require('./chapter-7-project');
 
 // naming convention to categorize types of tests
 // index.unit.test.js Unit tests
@@ -43,4 +48,58 @@ describe("VillageState Class Tests", () => {
     test("returns the same parcel if it doesn't belong to the destination", () => {
         expect(packageReturn.move("Alice's House").parcels).toEqual([{place: "Alice's House", address: "Grete's House"}]);
     })
+
+    test("create a random village state", () => {
+        const randomVillage = VillageState.random();
+        expect(typeof randomVillage).toBe("object");
+        expect(randomVillage.place).toBe("Post Office");
+        expect(randomVillage.parcels.length).toBe(5);
+    });
+});
+
+describe("Run Robot", () => {
+    const logSpy = jest.spyOn(console, "log");
+    const first = new VillageState(
+        "Post Office",
+        [{place: "Post Office", address: "Alice's House"}]
+    );
+    test("", () => {
+        runRobot(first,routeRobot);
+        expect(logSpy).toHaveBeenCalledTimes(2);
+    });
+});
+
+describe("Robot Bogo Deliver", () => {
+    test("picks a random value from an array", () => {
+        const nums = [1,2,3];
+        expect(typeof randomPick(nums)).toBe("number");
+    });
+
+    const village = new VillageState(
+        "Post Office",
+        [{place: "Post Office", address: "Alice's House"}]
+    );
+
+    test("pick a random street from the grid", () => {
+        expect(typeof randomRobot(village)).toBe("object");
+        expect(typeof randomRobot(village).direction).toBe("string");
+    });
+
+});
+
+describe("Route Robot", () => {
+    const expectedArray = [
+        "Cabin", "Alice's House","Bob's House",
+        "Town Hall","Daria's House","Ernie's House",
+        "Grete's House","Shop","Grete's House","Farm",
+        "Marketplace", "Post Office"
+    ];
+
+    test("returns full route array if memory is empty", () => {
+        expect(routeRobot(null, [])).toEqual({direction: "Alice's House", memory: expectedArray});
+    });
+
+    test("Takes a single old memory and returns empty array", () => {
+        expect(routeRobot(null,["Cabin"])).toEqual({direction: "Cabin", memory: []});
+    });
 });
