@@ -44,6 +44,7 @@ module.exports.compareRobots = compareRobots;
 // this causes the robot to go across the town to deliver 
 // even if there is a package nearby
 
+// Eloquent JS Hints for 7.2
 // compute routes for all packages
 // take shortest one
 // multiple short routes = prefer ones that go pick up a package instead of delivering
@@ -71,3 +72,43 @@ function packageOrientedRobot({place, parcels}, route) {
 module.exports.packageOrientedRobot = packageOrientedRobot;
 
 // runRobot(VillageState.random(), packageOrientedRobot, []);
+
+// 7.3 - Persistant Group
+// Most DS's in JS are not for persistent use
+// slice + concat create new arrays w/o damaging old ones
+// Set cannot create a new Set with an item added or removed
+
+// Write a new class called PGroup
+// It has add, delete and has methods
+// delete and add should return a new instance with the respective change
+// should work for a value with any type
+// does not have to efficient for a lot of values
+// constructor shouldn't be part of the class interface
+// PGroup.empty should be used as starting value
+
+// Q: Why do you need only one PGroup.empty
+// rather than a functiont hat create a new empty map everytime?
+
+class PGroup {
+    constructor(values) {
+        this.values = values;
+    }
+
+    add(value) {
+        if (this.has(value)) return this;
+        return new PGroup([...this.values, value]); 
+    }
+
+    delete(value) {
+        if (!this.has(value)) return this;
+        return new PGroup(this.values.filter( val => val != value ));
+    }
+
+    has(value) {
+        return this.values.includes(value);
+    }
+}
+
+PGroup.empty = new PGroup([]);
+
+module.exports.PGroup = PGroup;
