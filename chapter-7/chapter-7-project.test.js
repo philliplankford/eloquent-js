@@ -65,7 +65,7 @@ describe("Run Robot", () => {
     );
     test("", () => {
         runRobot(first,routeRobot);
-        expect(logSpy).toHaveBeenCalledTimes(2);
+        expect(logSpy).toHaveBeenCalledTimes(3);
     });
 });
 
