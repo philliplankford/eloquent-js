@@ -23,16 +23,17 @@ function primitiveMultiply(num1, num2) {
 
 module.exports.primitiveMultiply = primitiveMultiply;
 
-
-// for (;;) {    
-//     try {
-//         primitiveMultiply(2,5);
-//         break;
-//     } catch (error) {
-//         if (error instanceof MultiplicatorUnitFailure) { console.log(error.message); }
-//         else { throw error; }
-//     } 
-// }
+/* LOOP
+for (;;) {    
+    try {
+        primitiveMultiply(2,5);
+        break;
+    } catch (error) {
+        if (error instanceof MultiplicatorUnitFailure) { console.log(error.message); }
+        else { throw error; }
+    } 
+}
+*/
 
 // Exercise 8.2 - The Locked Box
 // consider this box with a lock
@@ -56,17 +57,23 @@ const box = {
     }
 };
 
+module.exports.box = box;
+
 function withBoxUnlocked(body) {
     // your code here
+    if (!box.locked) return body();
+
+    box.unlock();
     try {
-        box.unlock();
-        body();
+        return body();
     } catch(error) {
-        console.log(error.message)
+        console.log(error.message);
     } finally {
         box.lock();
     }
 }
+
+module.exports.withBoxUnlocked = withBoxUnlocked;
 
 withBoxUnlocked(function(){ box.content.push("gold piece"); });
 
@@ -79,3 +86,19 @@ try {
 }
 
 console.log(box.locked);
+
+/* SOLUTION
+    // Bonus
+    let locked = box.locked;
+    if (!locked) {
+        return body();
+    }
+    
+    // Solution
+    box.unlock();
+    try {
+        return body();
+    } finally {
+        box.lock();
+    }
+*/

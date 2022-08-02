@@ -1,4 +1,8 @@
-const { randomRange, primitiveMultiply, MultiplicatorUnitFailure, tryPrimitive } = require("./chapter-8-exercises");
+const { randomRange, 
+        primitiveMultiply, 
+        MultiplicatorUnitFailure, 
+        box,
+        withBoxUnlocked } = require("./chapter-8-exercises");
 
 describe("functions", () => {
 
@@ -30,3 +34,31 @@ describe("functions", () => {
     //     expect(() => { tryPrimitive() }).toThrow();
     // })
 })
+
+describe("locked box puzzle", () => {
+    describe("box object tests", () => {
+        test("box is locked", () => {
+            expect(box.locked).toBe(true);
+        })
+        test("box unlocks", () => {
+            box.unlock();
+            expect(box.locked).toBe(false);
+        })
+        test("box locks", () => {
+            console.log(box.locked);
+            box.lock();
+            expect(box.locked).toBe(true);
+        })
+
+        test("box content is locked", () => {
+            expect(() => { box.content }).toThrow();
+        })
+
+        test("box content is unlocked", () => {
+            box.unlock();
+            expect(box.content).toEqual(["gold piece"]);
+            box.lock();
+        })
+    })
+
+});
