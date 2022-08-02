@@ -44,7 +44,7 @@ module.exports.primitiveMultiply = primitiveMultiply;
 // regardless if the function returned normally or threw an exception
 // Extra points: if you call withBoxUnlocked when the box is unlocked 
 // the box stays unlocked
-/*
+
 const box = {
     locked: true,
     unlock() { this.locked = false; },
@@ -58,6 +58,14 @@ const box = {
 
 function withBoxUnlocked(body) {
     // your code here
+    try {
+        box.unlock();
+        body();
+    } catch(error) {
+        console.log(error.message)
+    } finally {
+        box.lock();
+    }
 }
 
 withBoxUnlocked(function(){ box.content.push("gold piece"); });
@@ -69,5 +77,5 @@ try {
 } catch (error) {
     console.log("Error raised:", error);
 }
+
 console.log(box.locked);
-*/
