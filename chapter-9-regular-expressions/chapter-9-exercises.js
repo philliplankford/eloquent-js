@@ -29,6 +29,18 @@ const moreThanSix = /\w{6,}/;
 // answer \w{7}
 
 // a word without the letter e or E
-const noE = /\b[^\We]+\b/
+const noE = /\b[^\We]+\b/;
 
 module.exports = { carCat, popProp, ferr, endIous, badPunc, moreThanSix, noE };
+
+// 9.2 - Quoting Style
+// you have written a story with single quotation marks
+// replace all dialogue quote with double quotes
+// keep single quotes like aren't
+// call the replace method
+
+const singleToDouble = /(^|\W.)'|'(\W|$)/g;
+// answer (^|\W)'|'(\W|$)
+// answer would take out punctuation before a quote
+// (^|\W.)'|'(\W|$)
+module.exports.singleToDouble = singleToDouble;

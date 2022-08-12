@@ -5,7 +5,8 @@ const {
     badPunc,
     endIous,
     moreThanSix,
-    noE
+    noE,
+    singleToDouble
 } = require('./chapter-9-exercises');
 
 describe("9.1 REGEX tests", () => {
@@ -48,4 +49,11 @@ describe("9.1 REGEX tests", () => {
         expect(noE.test("platypus")).toBe(true);
         expect(noE.test("eloquent")).toBe(false);
     });
+})
+
+describe("9.2 REGEX test", () => {
+    test("replace single quotes with double quotes", () => {
+        expect("'Hello there.'".replace(singleToDouble,"\"")).toBe("\"Hello there.\"");
+        expect("'ain't it'".replace(singleToDouble,"\"")).toBe("\"ain't it\"");
+    })
 })
