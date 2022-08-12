@@ -40,7 +40,21 @@ module.exports = { carCat, popProp, ferr, endIous, badPunc, moreThanSix, noE };
 // call the replace method
 
 const singleToDouble = /(^|\W.)'|'(\W|$)/g;
-// answer (^|\W)'|'(\W|$)
+// answer: (^|\W)'|'(\W|$)
 // answer would take out punctuation before a quote
-// (^|\W.)'|'(\W|$)
+// (^|\W.)'|'(\W|$) <- fixed
+// (^|[^\.?!\w])'|'(\W|$) still matches white space
 module.exports.singleToDouble = singleToDouble;
+
+// 9.3 - Numbers Again
+// Write an expression that only matches JavaScript style numbers
+// supports optional + or - in front of number
+// supports decimal dot
+// supports exponent notation 5e-3 1E10 (optional sign in front of exponent)
+// not necessary for numbers to be in front or after the dot
+// number cannot be a dot alone
+
+const jsNums = /^[+\-]?(\d+(\.\d*)?|\.\d+)([eE][+\-]?\d+)?$/;
+
+// my working answer ^[\.+-]?\d+\.?|e|\d|[-+]?\d+$
+module.exports.jsNums = jsNums;

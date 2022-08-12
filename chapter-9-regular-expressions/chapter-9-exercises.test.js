@@ -6,7 +6,8 @@ const {
     endIous,
     moreThanSix,
     noE,
-    singleToDouble
+    singleToDouble,
+    jsNums
 } = require('./chapter-9-exercises');
 
 describe("9.1 REGEX tests", () => {
@@ -49,11 +50,21 @@ describe("9.1 REGEX tests", () => {
         expect(noE.test("platypus")).toBe(true);
         expect(noE.test("eloquent")).toBe(false);
     });
-})
+});
 
 describe("9.2 REGEX test", () => {
     test("replace single quotes with double quotes", () => {
         expect("'Hello there.'".replace(singleToDouble,"\"")).toBe("\"Hello there.\"");
         expect("'ain't it'".replace(singleToDouble,"\"")).toBe("\"ain't it\"");
     })
-})
+});
+
+describe("9.3 REGEX test", () => {
+    test("recognize JavaScript numbers", () => {
+        expect(jsNums.test(".5")).toBe(true);
+        expect(jsNums.test("10e5")).toBe(true);
+        expect(jsNums.test(".")).toBe(false);
+        expect(jsNums.test("+5")).toBe(true);
+
+    })
+});
