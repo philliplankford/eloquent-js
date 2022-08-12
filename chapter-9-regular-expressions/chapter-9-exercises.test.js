@@ -1,31 +1,51 @@
-// Fill in the regular expressions
-// Given tests
-/*
-verify(/.../,
-       ["my car", "bad cats"],
-       ["camper", "high art"]);
+const {
+    carCat,
+    popProp,
+    ferr,
+    badPunc,
+    endIous,
+    moreThanSix,
+    noE
+} = require('./chapter-9-exercises');
 
-verify(/.../,
-       ["pop culture", "mad props"],
-       ["plop", "prrrop"]);
+describe("9.1 REGEX tests", () => {
+    test("match car or cat", () => {
+        expect(carCat.test("my car")).toBe(true);
+        expect(carCat.test("bad cats")).toBe(true);
+        expect(carCat.test("camper")).toBe(false);
+    });
 
-verify(/.../,
-       ["ferret", "ferry", "ferrari"],
-       ["ferrum", "transfer A"]);
+    test("match pop or prop", () => {
+        expect(popProp.test("pop culture")).toBe(true);
+        expect(popProp.test("mad props")).toBe(true);
+        expect(popProp.test("plop")).toBe(false);
+    });
 
-verify(/.../,
-       ["how delicious", "spacious room"],
-       ["ruinous", "consciousness"]);
+    test("match ferret, ferry or ferrari", () => {
+        expect(ferr.test("ferret")).toBe(true);
+        expect(ferr.test("ferry")).toBe(true);
+        expect(ferr.test("ferrari")).toBe(true);
+        expect(ferr.test("ferrum")).toBe(false);
+    });
 
-verify(/.../,
-       ["bad punctuation ."],
-       ["escape the period"]);
+    test("match a word that ends in ious", () => {
+        expect(endIous.test("delicious")).toBe(true);
+        expect(endIous.test("spacious room")).toBe(true);
+        expect(endIous.test("ruinous")).toBe(false);
+    });
 
-verify(/.../,
-       ["Siebentausenddreihundertzweiundzwanzig"],
-       ["no", "three small words"]);
+    test("match whitespace followed by punctuation", () => {
+        expect(badPunc.test(" .")).toBe(true);
+        expect(badPunc.test("escape period")).toBe(false);
+    });
 
-verify(/.../,
-       ["red platypus", "wobbling nest"],
-       ["earth bed", "learning ape", "BEET"]);
-*/
+    test("match any word greater than 6 characters", () => {
+        expect(moreThanSix.test("Siebentausenddreihundertzweiundzwanzig")).toBe(true);
+        expect(moreThanSix.test("no")).toBe(false);
+    });
+
+    test("match any word without e", () => {
+        expect(noE.test("platypus")).toBe(true);
+        expect(noE.test("eloquent")).toBe(false);
+    });
+})

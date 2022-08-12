@@ -3,32 +3,32 @@
 // the expression should be as small as possible
 
 // car and cat
-const carCat = /cat|car/gi;
+const carCat = /cat|car/;
 // alternate option: ca?[r|t]
 // answer: ca[rt]
 
 // pop and prop
-const popProp = /pr?ops?/gi;
+const popProp = /pr?ops?/;
 // alternate option: pop|props
 // answer: pr?op
 
 // ferret, ferry, and ferrari
-const ferr = /ferr(et|y|ari)/gi;
+const ferr = /ferr(et|y|ari)/;
 // first try: ferr[aey](t|ri|)
 
 // any word ending in ious
-const endIous = /\w+ious/gi;
+const endIous = /\w+ious/;
 // answer ious\b
 
 // whitespace followed by period, comma, colon, or semi colon
-const badPunc = / [.,:;]/gi;
+const badPunc = / [.,:;]/;
 // answer \s[./:;] (mine is shorter)
 
 // a word longer than six letters
-const moreThanSix = /\w{6,}/gi;
+const moreThanSix = /\w{6,}/;
 // answer \w{7}
 
 // a word without the letter e or E
-const noE = /\b[^\We]+\b/gi
+const noE = /\b[^\We]+\b/
 
 module.exports = { carCat, popProp, ferr, endIous, badPunc, moreThanSix, noE };
