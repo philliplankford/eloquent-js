@@ -1,5 +1,5 @@
 // Exercise 8.1 - Retry
-// you have a functino primitiveMultiply
+// you have a function primitiveMultiply
 // 20% of the time it multiplies 2 numbers
 // 80% of the time is raises the exception "MultiplicatorUnitFailure"
 // write a function that wraps this function and keeps calling it until it succeeds
